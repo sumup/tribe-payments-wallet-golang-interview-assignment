@@ -1,0 +1,17 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.test
+*.out
+# vendor/
+/vendor/
+/Godeps/
+.idea
+.code
+.vscode
+.DS_Store
+*.patch
+/tribe-payments-wallet-golang-interview-assignment
