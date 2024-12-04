@@ -6,7 +6,7 @@ import (
 
 	"github.com/sumup-oss/go-pkgs/os"
 
-	"github.com/sumup/payments-bank-account-golang-assignment/internal/cmd"
+	"tribe-payments-wallet-golang-interview-assignment/internal/cmd"
 )
 
 func main() {

@@ -14,4 +14,4 @@
 .vscode
 .DS_Store
 *.patch
-/payments-bank-account-golang-assignment
+/tribe-payments-wallet-golang-interview-assignment

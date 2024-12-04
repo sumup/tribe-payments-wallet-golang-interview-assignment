@@ -3,12 +3,17 @@ package cmd
 import (
 	"context"
 
+	"tribe-payments-wallet-golang-interview-assignment/internal/api"
+	"tribe-payments-wallet-golang-interview-assignment/internal/config"
+	"tribe-payments-wallet-golang-interview-assignment/internal/http"
+
+	"github.com/go-chi/chi/v5"
 	"github.com/spf13/cobra"
 	"github.com/sumup-oss/go-pkgs/errors"
 	"github.com/sumup-oss/go-pkgs/logger"
 	"github.com/sumup-oss/go-pkgs/os"
 	"github.com/sumup-oss/go-pkgs/task"
-	"github.com/sumup/payments-bank-account-golang-assignment/internal/config"
+	"moul.io/chizap"
 )
 
 //nolint:gocognit
@@ -44,10 +49,38 @@ func NewApiCmd(osExecutor os.OsExecutor) *cobra.Command {
 				cfg.GracefulShutdownTimeout,
 			)
 
-			taskGroup := task.NewGroup()
+			mux := chi.NewRouter()
+			mux.Use(
+				http.Recovery(
+					log,
+					api.WritePanicResponse(log),
+				),
+				chizap.New(
+					log.Logger,
+					&chizap.Opts{
+						WithReferer:   true,
+						WithUserAgent: true,
+					},
+				),
+			)
 
+			api.RegisterRoutes(mux, log)
+
+			httpServer := http.NewServer(
+				log,
+				cfg.ListenAddress,
+				mux,
+				http.WithMaxHeaderBytes(cfg.MaxHeaderBytes),
+				http.WithReadHeaderTimeout(cfg.ReadHeaderTimeout),
+				http.WithReadTimeout(cfg.ReadTimeout),
+				http.WithServerShutdownTimeout(cfg.GracefulShutdownTimeout),
+				http.WithWriteTimeout(cfg.WriteTimeout),
+			)
+
+			taskGroup := task.NewGroup()
 			taskGroup.Go(
 				shutdownTask.Run,
+				httpServer.Run,
 			)
 
 			err = taskGroup.Wait(ctx)

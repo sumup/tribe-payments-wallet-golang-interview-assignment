@@ -36,18 +36,6 @@ func WithName(name string) option {
 	}
 }
 
-func WithPath(path string) option {
-	return func(cfg *config) {
-		cfg.path = path
-	}
-}
-
-func WithTLSConfig(tlsConfig *tls.Config) option {
-	return func(cfg *config) {
-		cfg.tlsConfig = tlsConfig
-	}
-}
-
 func WithReadTimeout(readTimeout time.Duration) option {
 	return func(cfg *config) {
 		cfg.readTimeout = readTimeout
@@ -63,12 +51,6 @@ func WithReadHeaderTimeout(readHeaderTimeout time.Duration) option {
 func WithWriteTimeout(writeTimeout time.Duration) option {
 	return func(cfg *config) {
 		cfg.writeTimeout = writeTimeout
-	}
-}
-
-func WithIdleTimeout(idleTimeout time.Duration) option {
-	return func(cfg *config) {
-		cfg.idleTimeout = idleTimeout
 	}
 }
 

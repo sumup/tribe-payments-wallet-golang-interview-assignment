@@ -43,17 +43,12 @@ type Database struct {
 	MaxConnIdleTime time.Duration `default:"30m" envconfig:"DB_MAX_CONN_IDLE_TIME"`
 
 	// LogQueries specify whether to log SQL queries.
-	//
-	// NOTE: when LogQueries is false, no queries will be logged including the failures.
 	LogQueries bool `default:"false" envconfig:"DB_LOG_QUERIES"`
 
 	// LogSQL specify whether the query logs will log the SQL query.
-	//
 	// For example, when LogSQL is false, the query log won't have the "sql" field.
 	LogSQL bool `default:"false" envconfig:"DB_LOG_SQL"`
 
 	// LogArgs specify whether the query arguments must be logged.
-	//
-	// WARN: this MUST NOT be enabled on production.
 	LogSQLArgs bool `default:"false" envconfig:"DB_LOG_SQL_ARGS"`
 }
