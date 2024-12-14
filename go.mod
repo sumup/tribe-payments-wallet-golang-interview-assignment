@@ -9,6 +9,7 @@ require (
 	github.com/sumup-oss/go-pkgs v0.0.0-20240725083203-e41232a366b8
 	github.com/sumup-oss/go-pkgs/errors v1.0.0
 	go.uber.org/zap v1.27.0
+	moul.io/chizap v1.0.3
 )
 
 require (
@@ -21,7 +22,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.8.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.27.0 // indirect
-	golang.org/x/sys v0.25.0 // indirect
-	moul.io/chizap v1.0.3 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
 )
